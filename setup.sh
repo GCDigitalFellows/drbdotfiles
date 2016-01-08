@@ -33,7 +33,7 @@ e_ask() {
 
 is_confirmed() {
   result=$1
-  read -rs -k 1 ans
+  read -rs -N 1 ans
   case "${ans}" in
     y|Y|$'\n')
       printf "Yes\n"
