@@ -13,21 +13,22 @@ if type "brew" > /dev/null 2>&1; then
   brew install wget --with-iri
 
   brewlist=(
-      coreutils
-      homebrew/dupes/grep
-      homebrew/dupes/openssh
-      ack
-      git
-      libxml2
-      homebrew/python/matplotlib-basemap
-      mysql
-      postgresql
-      pyenv
-      pyenv-virtualenv
-      sqlite
-      xz
+    coreutils
+    homebrew/dupes/grep
+    homebrew/dupes/openssh
+    ack
+    emacs
+    git
+    libxml2
+    homebrew/python/matplotlib-basemap
+    mysql
+    postgresql
+    pyenv
+    pyenv-virtualenv
+    sqlite
+    vim
   )
   for brewitem in $brewlist; do
-    brew install $brewitem;
+    brew install "$brewitem";
   done
 fi
