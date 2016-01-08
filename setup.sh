@@ -1,12 +1,16 @@
 #!/usr/bin/env bash
 
 # Helper functions
+command_exists () {
+  command -v "$1" &> /dev/null
+}
+
 info() {
   printf "\r  [ \033[00;34m..\033[0m ] %s\n" "$1"
 }
 
 user() {
-  printf "\r  [ \033[0;33m??\033[0m ] %s\n" "$1"
+  printf "\r  [ \033[0;33m??\033[0m ] %s" "$1"
 }
 
 success() {
@@ -24,8 +28,7 @@ section() {
 }
 
 e_ask() {
-    printf "\n%s\n" "$1"
-    printf "(y/N): "
+  user "$1 (y/N):"
 }
 
 is_confirmed() {
@@ -113,25 +116,28 @@ info "*********************"
 # Set up directories
 DOTDIR="$HOME/.dotfiles"
 
-if ! type "gcc" > /dev/null 2>&1; then
+if ! command_exists 'gcc'; then
   info "It looks like the command line tools are not installed."
   info "I will try to install them for you"
   curl -L https://raw.githubusercontent.com/GCDigitalFellows/drbdotfiles/master/etc/clt.sh | sh
 fi
 
 # Install homebrew if it's not already installed
-if ! type "brew" > /dev/null 2>&1; then
+if ! command_exists 'brew'; then
   info 'Installing Homebrew'
   ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 fi
 
 # Install git before we continue
-if ! type "git" > /dev/null 2&1; then
+if ! command_exists 'git'; then
   brew update
   brew install git
 fi
+
 # Install homebrew cask if it's not already
-if ! type "brew-cask" > /dev/null 2&1; then
+# This isn't the best way to test if it's installed, but it was the easiest
+# thing that I could think of since the recent merger of cask into homebrew
+if [[ ! -d "/opt/homebrew-cask/Caskroom" ]]; then
   brew install caskroom/cask/brew-cask
 fi
 
@@ -140,7 +146,8 @@ if [[ ! -d $DOTDIR ]]; then
   info "Cloning dotfiles to $DOTDIR"
   git clone https://github.com/gcdigitalfellows/drbdotfiles.git "$DOTDIR"
 fi
-cd "$DOTDIR" || exit
+pushd $(pwd)
+cd "$DOTDIR" &>/dev/null || exit
 
 e_ask "Run all scripts without prompts?"
 is_confirmed DOALL
@@ -192,6 +199,8 @@ if [ "$DOALL" -eq 1 ] || [ "$lns" -eq 1 ]; then
   success "Dotfiles successfully symlinked to your home directory"
 
 fi
+
+popd &>/dev/null
 
 success "Finished running all of the scripts."
 success "You should probably restart your computer now."
