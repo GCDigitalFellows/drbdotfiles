@@ -3,7 +3,7 @@
 ## Quickstart
 
 ```bash
-curl -L https://raw.githubusercontent.com/GCDigitalFellows/drbdotfiles/master/setup.sh | sh
+bash -c "$(curl -L https://raw.githubusercontent.com/GCDigitalFellows/drbdotfiles/master/setup.sh)"
 ```
 
 Follow the prompts and you should be golden!
