@@ -113,6 +113,12 @@ info "*********************"
 # Set up directories
 DOTDIR="$HOME/.dotfiles"
 
+if ! type "gcc" > /dev/null 2>&1; then
+  info "It looks like the command line tools are not installed."
+  info "I will try to install them for you"
+  curl -L https://raw.githubusercontent.com/GCDigitalFellows/drbdotfiles/master/etc/clt.sh | sh
+fi
+
 # Install homebrew if it's not already installed
 if ! type "brew" > /dev/null 2>&1; then
   info 'Installing Homebrew'
