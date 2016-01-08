@@ -37,5 +37,6 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export PATH=$HOME/bin:/usr/local/bin:${PATH}
 
 alias emacs='/usr/local/bin/emacs' # just in case $PATH gets confused
-eval "$(pyenv init -)"
 
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"

@@ -25,4 +25,61 @@ Follow the prompts and you should be golden!
   cd ~/.dotfiles
   source setup.sh
   ```
+# What’s Installed with this?
+###Basics
+* OS X Command Line Tools
+* homebrew
+* homebrew cask
+* python 2.7.11, 3.5.1, anaconda3
 
+###Homebrew stuff
+* coreutils: gnu versions of all the good stuff
+* updated versions of grep/sed/wget/ack/openssh
+* emacs: editor
+* vim: [better] editor
+* git: version control
+* matplotlib-basemap: basemap for python (needs to be built)
+* mysql: updated version of database software
+* postgresql: another database option
+* sqlite: yet another database option (better for local apps...)
+* pyenv: python environment manager and installer
+* pyenv-virtualenv: for using virtualenv with pyenv
+
+###Gui Apps (casks)
+* aquamacs/emacs-cocoa: gui versions of emacs
+* atom/brackets: editors
+* avast: anti-virus/malware
+* cyberduck: ftp
+* diffmerge: gui diff tool
+* firefox/chrome: browsers
+* gimp: image editor
+* github: gui github client
+* inkscape: vector graphics editor
+* iterm2: better terminal editor
+* keka: better gui archive utility
+* libreoffice: free office suite
+* macvim: gui editor
+* mapbox-studio: gis suite
+* qgis: gis suite
+* r: statistical software
+* sequel-pro: gui database management
+* sourcetree: gui svn client
+* sqlitebrowser: gui sqlite db client
+* textmate: another editor
+* tilemill: gui tool for editing map tiles
+* virtualbox: virtual machine engine
+* zotero: reference management software
+
+###Python
+* jupyter: ipython notebooks
+* matplotlib: mapping lib
+* nltk: natural language toolkit
+* numpy: base library for scientific computing
+* pandas: data manipulation
+* pillow: images
+* pyshp: shapefiles
+* scipy: “science” tools
+* shapely: shape manipulation
+* shapy: network emulation
+* sklearn: machine learning
+* cartopy: cartography with matplotlib

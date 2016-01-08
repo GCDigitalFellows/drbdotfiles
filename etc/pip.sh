@@ -3,10 +3,8 @@
 # to-do: install via anaconda
 # to-do: install basemap, cartopy
 pips=(\
-flask \
 jupyter \
 matplotlib \
-neovim \
 nltk \
 numpy \
 pandas \

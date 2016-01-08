@@ -8,7 +8,6 @@ brew update
 
 # Install native apps with cask
 casklist=(
-  anaconda
   aquamacs
   atom
   avast
@@ -17,8 +16,10 @@ casklist=(
   diffmerge
   emacs
   firefox
+  gimp
   github-desktop
   google-chrome
+  inkscape
   iterm2
   keka
   libreoffice
@@ -32,7 +33,6 @@ casklist=(
   textmate
   tilemill
   virtualbox
-  vlc
   zotero
 )
 for caskitem in $casklist; do
