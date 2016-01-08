@@ -1,11 +1,15 @@
 # GC Digital Research Bootcamp Dotfiles
+
 ## Quickstart
+
 ```bash
 curl -L https://raw.githubusercontent.com/GCDigitalFellows/drbdotfiles/master/setup.sh | sh
 ```
+
 Follow the prompts and you should be golden!
 
 ## Something went wrong
+
 1. Try manually installing [homebrew](http://brew.sh/).
 
   ```bash
@@ -25,14 +29,18 @@ Follow the prompts and you should be golden!
   cd ~/.dotfiles
   source setup.sh
   ```
+
 # What’s Installed with this?
-###Basics
+
+##Basics
+
 * OS X Command Line Tools
 * homebrew
 * homebrew cask
 * python 2.7.11, 3.5.1, anaconda3
 
-###Homebrew stuff
+##Homebrew stuff
+
 * coreutils: gnu versions of all the good stuff
 * updated versions of grep/sed/wget/ack/openssh
 * emacs: editor
@@ -45,7 +53,8 @@ Follow the prompts and you should be golden!
 * pyenv: python environment manager and installer
 * pyenv-virtualenv: for using virtualenv with pyenv
 
-###Gui Apps (casks)
+##Gui Apps (casks)
+
 * aquamacs/emacs-cocoa: gui versions of emacs
 * atom/brackets: editors
 * avast: anti-virus/malware
@@ -70,7 +79,8 @@ Follow the prompts and you should be golden!
 * virtualbox: virtual machine engine
 * zotero: reference management software
 
-###Python
+##Python
+
 * jupyter: ipython notebooks
 * matplotlib: mapping lib
 * nltk: natural language toolkit
