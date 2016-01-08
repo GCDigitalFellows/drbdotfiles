@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Helper functions
 command_exists () {
@@ -32,17 +32,17 @@ e_ask() {
 }
 
 is_confirmed() {
-  result=$1
-  read -rs -N 1 ans
+  local result=$1
+  read -rs -n1 ans
   case "${ans}" in
     y|Y|$'\n')
       printf "Yes\n"
-      (( result=1 ))
+      (( $result=1 ))
       return 1
       ;;
     *)  # This is the default
       printf "No\n"
-      (( result=0 ))
+      (( $result=0 ))
       return 0
     esac
 }
@@ -152,7 +152,7 @@ cd "$DOTDIR" &>/dev/null || exit
 e_ask "Run all scripts without prompts?"
 is_confirmed DOALL
 
-if [ "$DOALL" -eq 0 ]; then
+if [[ "$DOALL" -eq 0 ]]; then
   if [[ $(uname) == 'Darwin' ]]; then
     e_ask "Install command line tools?"
     is_confirmed hb
@@ -164,7 +164,7 @@ if [ "$DOALL" -eq 0 ]; then
 fi #[ $DOALL -eq 1 ]
 
 if [[ $(uname) == 'Darwin' ]]; then
-  if [ "$DOALL" -eq 1 ] || [ "$hb" -eq 1 ]; then
+  if [[ "$DOALL" -eq 1 ]] || [[ "$hb" -eq 1 ]]; then
     section "Homebrew"
     info "Setting user permissions on /usr/local"
     sudo chown -R "$USER:admin" /usr/local
@@ -179,12 +179,12 @@ if [[ $(uname) == 'Darwin' ]]; then
   fi
 fi
 
-if [ "$DOALL" -eq 1 ] || [ "$pi" -eq 1 ]; then
+if [[ "$DOALL" -eq 1 ]] || [[ "$pi" -eq 1 ]]; then
   section "Python and Pips"
   source 'etc/pip.sh'
 fi
 
-if [ "$DOALL" -eq 1 ] || [ "$lns" -eq 1 ]; then
+if [[ "$DOALL" -eq 1 ]] || [[ "$lns" -eq 1 ]]; then
   section "Symlinking dotfiles"
   overwrite_all=false
   backup_all=false
