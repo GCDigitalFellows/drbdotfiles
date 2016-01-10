@@ -28,7 +28,7 @@ if type "brew" > /dev/null 2>&1; then
     sqlite \
     vim \
   )
-  for brewitem in $brewlist; do
+  for brewitem in ${brewlist[@]}; do
     brew install "$brewitem";
   done
 fi
