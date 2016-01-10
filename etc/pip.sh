@@ -16,7 +16,7 @@ shapy \
 sklearn \
 virtualenv \
 )
-for pip in $pips; do
+for pip in ${pips[@]}; do
   pip install $pip -U
 done
 
