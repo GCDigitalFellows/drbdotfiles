@@ -84,6 +84,7 @@ Follow the prompts and you should be golden!
 
 ##Python
 
+* cartopy: cartography with matplotlib
 * jupyter: ipython notebooks
 * matplotlib: mapping lib
 * nltk: natural language toolkit
@@ -95,4 +96,4 @@ Follow the prompts and you should be golden!
 * shapely: shape manipulation
 * shapy: network emulation
 * sklearn: machine learning
-* cartopy: cartography with matplotlib
+* virtualenv: virtual environments for isolating dependencies

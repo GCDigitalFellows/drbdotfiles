@@ -14,6 +14,7 @@ scipy \
 shapely \
 shapy \
 sklearn \
+virtualenv \
 )
 for pip in $pips; do
   pip install $pip -U
