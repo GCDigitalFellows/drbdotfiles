@@ -195,7 +195,7 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$lns" -eq 1 ]]; then
 
   for src in $(find -H "$DOTDIR/home" -type f)
   do
-    dst="$HOME/.$(basename "${src%.*}")"
+    dst="$HOME/.$(basename "${src%}")"
     link_file "$src" "$dst"
   done
 
