@@ -35,8 +35,8 @@ casklist=(
   virtualbox
   zotero
 )
-for caskitem in ${casklist[@]}; do
-  brew cask install "$caskitem"
+for caskitem in "${casklist[@]}"; do
+  brew cask install --appdir="/Applications" "$caskitem"
 done
 
 # Remove outdated versions from the cellar
