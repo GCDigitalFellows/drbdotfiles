@@ -180,6 +180,7 @@ if [[ $(uname) == 'Darwin' ]]; then
     pyenv install anaconda3-2.4.0
     pyenv rehash
     pyenv global 3.5.1 2.7.11 anaconda3-2.4.0
+    source 'home/bashrc'
   fi
   if [[ "$DOALL" -eq 1 ]] || [[ "$ca" -eq 1 ]]; then
     section "Homebrew Cask"

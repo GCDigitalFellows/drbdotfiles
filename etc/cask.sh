@@ -6,6 +6,9 @@
 # Make sure we’re using the latest Homebrew
 brew update
 
+# Install dependencies first
+brew cask install xquartz
+sudo ln -s /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python /Library/Python/2.7/site-packages/matplotlib-override
 # Install native apps with cask
 casklist=(
   aquamacs
