@@ -157,8 +157,10 @@ is_confirmed DOALL
 
 if [[ "$DOALL" -eq 0 ]]; then
   if [[ $(uname) == 'Darwin' ]]; then
-    e_ask "Install command line tools?"
+    e_ask "Install Homebrew apps?"
     is_confirmed hb
+    e_ask "Install Homebrew cask apps?"
+    is_confirmed ca
   fi
   e_ask "Install Python pips?"
   is_confirmed pi
@@ -173,12 +175,15 @@ if [[ $(uname) == 'Darwin' ]]; then
     sudo chown -R "$USER:admin" /usr/local
  
     source 'etc/brews.sh'
-    source 'etc/cask.sh'
     pyenv install 2.7.11
     pyenv install 3.5.1
     pyenv anaconda3-2.4.0
     pyenv rehash
     pyenv global 3.5.1 2.7.11 anaconda3-2.4.0
+  fi
+  if [[ "$DOALL" -eq 1 ]] || [[ "$ca" -eq 1 ]]; then
+    section "Homebrew Cask"
+    source 'etc/cask.sh'
   fi
 fi
 
