@@ -177,7 +177,7 @@ if [[ $(uname) == 'Darwin' ]]; then
     source 'etc/brews.sh'
     pyenv install 2.7.11
     pyenv install 3.5.1
-    pyenv anaconda3-2.4.0
+    pyenv install anaconda3-2.4.0
     pyenv rehash
     pyenv global 3.5.1 2.7.11 anaconda3-2.4.0
   fi
