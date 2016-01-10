@@ -2,7 +2,7 @@
 
 # Helper functions
 command_exists () {
-  command -v "$1" &> /dev/null
+  command -v "$1" &> /dev/null 2>&1
 }
 
 info() {
@@ -125,7 +125,7 @@ fi
 # Install homebrew if it's not already installed
 if ! command_exists 'brew'; then
   info 'Installing Homebrew'
-  ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 # Install git before we continue
