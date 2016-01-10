@@ -2,6 +2,9 @@
 
 ## Quickstart
 
+Open a Terminal window (Applications > Terminal.app) and paste the following
+command in a single line, then hit Enter:
+
 ```bash
 bash -c "$(curl -L https://raw.githubusercontent.com/GCDigitalFellows/drbdotfiles/master/setup.sh)"
 ```
