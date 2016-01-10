@@ -142,12 +142,15 @@ if [[ ! -d "/opt/homebrew-cask/Caskroom" ]]; then
 fi
 
 # clone the dotfiles
+pushd $(pwd)
 if [[ ! -d $DOTDIR ]]; then
   info "Cloning dotfiles to $DOTDIR"
   git clone https://github.com/gcdigitalfellows/drbdotfiles.git "$DOTDIR"
+  cd "$DOTDIR" &>/dev/null || exit
+else
+  cd "$DOTDIR" &>/dev/null || exit
+  git pull
 fi
-pushd $(pwd)
-cd "$DOTDIR" &>/dev/null || exit
 
 e_ask "Run all scripts without prompts?"
 is_confirmed DOALL
