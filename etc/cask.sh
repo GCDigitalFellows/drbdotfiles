@@ -19,6 +19,7 @@ casklist=(
   github-desktop
   google-chrome
   iterm2
+  java
   keka
   macvim
   qgis
