@@ -4,7 +4,7 @@
 # Update everything
 #
 
-if [[ $(uname) == darwin* ]]; then
+if [[ $(uname) == 'Darwin' ]]; then
     echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> System updates <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
     sudo softwareupdate -i -a
     echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update Homebrew <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
