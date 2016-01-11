@@ -2,21 +2,21 @@
 
 # to-do: install via anaconda
 # to-do: install basemap, cartopy
-pips=(\
-jupyter \
-matplotlib \
-nltk \
-numpy \
-pandas \
-pillow \
-pyshp \
-scipy \
-shapely \
-shapy \
-sklearn \
-virtualenv \
+pips=(
+jupyter
+matplotlib
+nltk
+numpy
+pandas
+pillow
+pyshp
+scipy
+shapely
+shapy
+sklearn
+virtualenv
 )
-for pip in ${pips[@]}; do
+for pip in "${pips[@]}"; do
   pip install $pip -U
 done
 
