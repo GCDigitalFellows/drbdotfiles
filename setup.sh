@@ -180,7 +180,7 @@ if [[ $(uname) == 'Darwin' ]]; then
     pyenv install anaconda3-2.4.0
     pyenv rehash
     pyenv global 3.5.1 2.7.11 anaconda3-2.4.0
-    source 'home/bashrc'
+    source 'home/*' # refresh the environment to get pyenv up and running
   fi
   if [[ "$DOALL" -eq 1 ]] || [[ "$ca" -eq 1 ]]; then
     section "Homebrew Cask"
@@ -220,7 +220,7 @@ if [[ "$sc" -eq 1 ]]; then
   ln -sf /Applications/Cyberduck.app "$dst"
   ln -sf /Applications/Firefox.app "$dst"
   ln -sf /Applications/Google\ Chrome.app "$dst"
-  ln -sf /Applications/Github.app "$dst"
+  ln -sf /Applications/GitHub\ Desktop.app "$dst"
   ln -sf /Applications/iTerm.app "$dst"
   ln -sf /Applications/QGIS.app "$dst"
   ln -sf /Applications/R.app "$dst"
