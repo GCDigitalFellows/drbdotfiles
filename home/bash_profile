@@ -1,0 +1,46 @@
+# Add a variable pointing to these dotfiles!
+export dotfiles="$HOME/.dotfiles"
+
+# Terminal Colors
+export CLICOLOR=1
+export TERM="xterm-256color"
+
+# Bash History Options
+export HISTSIZE=32768
+export HISTFILESIZE=${HISTSIZE} # bash will remember N commands
+export HISTCONTROL=ignoreboth   # ingore duplicates and spaces
+export HISTIGNORE='&:ll:la:ls:[bf]g:exit:pwd:clear:history'
+export HISTTIMEFORMAT='%b %d %H:%M:%S: '
+shopt -s histappend
+set cmdhist
+export EDITOR=atom
+export PAGER=less
+export MANPAGER="less -X"
+
+export DOTDIR=$HOME/.dotfiles
+
+alias l='ls -FG'
+alias la='ls -alhFG'
+alias ll='ls -alhFG'
+alias ls='ls -G'
+alias h='history |grep'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias df='df -h'
+alias mkdir='mkdir -p -v'
+alias more='less'
+export LESS="-X -M -E -R"
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+export PATH=$HOME/bin:/usr/local/bin:${PATH}
+
+alias emacs='/usr/local/bin/emacs' # just in case $PATH gets confused
+alias update='source $dotfiles/etc/update.sh'
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
