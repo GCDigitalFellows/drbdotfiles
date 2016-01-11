@@ -211,5 +211,18 @@ fi
 
 popd &>/dev/null
 
-success "Finished running all of the scripts."
+success "Finished running all of the installation scripts."
+e_ask "Would you like to create some shortcuts on the desktop?"
+is_confirmed sc
+if [[ "$sc" -eq 1 ]]; then
+  dst="$HOME/Desktop/"
+  ln -sf /Applications/Atom.app "$dst"
+  ln -sf /Applications/Cyberduck.app "$dst"
+  ln -sf /Applications/Firefox.app "$dst"
+  ln -sf /Applications/Google\ Chrome.app "$dst"
+  ln -sf /Applications/Github.app "$dst"
+  ln -sf /Applications/iTerm.app "$dst"
+  ln -sf /Applications/QGIS.app "$dst"
+  ln -sf /Applications/R.app "$dst"
+fi
 success "You should probably restart your computer now."
