@@ -1,5 +1,5 @@
 # Add a variable pointing to these dotfiles!
-export dotfiles="$HOME/.dotfiles"
+export DOTDIR="$HOME/.dotfiles"
 
 # Terminal Colors
 export CLICOLOR=1
@@ -17,8 +17,6 @@ export EDITOR=atom
 export PAGER=less
 export MANPAGER="less -X"
 
-export DOTDIR=$HOME/.dotfiles
-
 alias l='ls -FG'
 alias la='ls -alhFG'
 alias ll='ls -alhFG'
@@ -34,13 +32,11 @@ alias df='df -h'
 alias mkdir='mkdir -p -v'
 alias more='less'
 export LESS="-X -M -E -R"
-export CLICOLOR=1
 export LSCOLORS=GxFxCxDxBxegedabagaced
 
-export PATH=$HOME/bin:/usr/local/bin:${PATH}
+export PATH="$HOME/bin:/usr/local/bin:${PATH}"
 
-alias emacs='/usr/local/bin/emacs' # just in case $PATH gets confused
-alias update='source $dotfiles/etc/update.sh'
+alias update='source $DOTDIR/etc/update.sh'
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"

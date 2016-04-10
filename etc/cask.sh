@@ -14,6 +14,7 @@ casklist=(
   atom
   avast
   cyberduck
+  diffmerge
   emacs
   firefox
   github-desktop
@@ -29,7 +30,6 @@ casklist=(
 # extra stuff i deleted to speed up the installation:
   # aquamacs
   # brackets
-  # diffmerge
   # gimp
   # inkscape
   # libreoffice

@@ -6,7 +6,7 @@ command_exists () {
 }
 
 info() {
-  printf "\r  [ \033[00;34m..\033[0m ] %s\n" "$1"
+  printf "\r  [ \033[00;34m=>\033[0m ] %s\n" "$1"
 }
 
 user() {
@@ -17,14 +17,21 @@ success() {
   printf "\r\033[2K  [ \033[00;32mOK\033[0m ] %s\n" "$1"
 }
 
+warn() {
+  printf "\r  [ \033[00;33m\!\!\033[0m ] %s\n" "$1"
+}
+
 fail() {
-  printf "\r\033[2K  [\033[0;31mFAIL\033[0m] %s\n" "$1"
+  printf "\r\033[2K  [\033[0;31mXX\033[0m] %s\n" "$1"
   echo ''
   exit
 }
 
 section() {
-  info "............$1........."
+  info ""
+  info ""
+  info "............ $1 ..........."
+  info ""
 }
 
 e_ask() {
@@ -113,84 +120,95 @@ info "*********************"
 info "*    Here we go!    *"
 info "*********************"
 
+section "Preliminary Software Checks"
+
 # Set up directories
 DOTDIR="$HOME/.dotfiles"
 clt=$(xcode-select -p &>/dev/null)$?
+info "Checking for XCode command line tools"
 if [[ $clt -eq 2 ]]; then
-  info "It looks like the command line tools are not installed."
-  info "I will try to install them for you"
+  warn "The command line tools were not found. Attempting to install them..."
   curl -L https://raw.githubusercontent.com/GCDigitalFellows/drbdotfiles/master/etc/clt.sh | sh
+else
+  success "Command line tools already installed"
 fi
 
 # Install homebrew if it's not already installed
+info "Checking for Homebrew"
 if ! command_exists 'brew'; then
-  info 'Installing Homebrew'
+  warn "Homebrew not found. Attempting to install it..."
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+else
+  success "Homebrew is already installed"
 fi
 
 # Install git before we continue
+info "Checking for Git"
 if ! command_exists 'git'; then
+  warn "Git (command line) not found. Attempting to install it using Homebrew..."
   brew update
   brew install git
+else
+  success "Git is already installed"
 fi
 
 # Install homebrew cask if it's not already
 # This isn't the best way to test if it's installed, but it was the easiest
 # thing that I could think of since the recent merger of cask into homebrew
-if [[ ! -d "/opt/homebrew-cask/Caskroom" ]]; then
-  brew install caskroom/cask/brew-cask
-fi
+# if [[ ! -d "/opt/homebrew-cask/Caskroom" ]]; then
+#   brew install caskroom/cask/brew-cask
+# fi
 
+section "Setting up dotfiles repo"
 # clone the dotfiles
 pushd $(pwd)
 if [[ ! -d $DOTDIR ]]; then
   info "Cloning dotfiles to $DOTDIR"
   git clone https://github.com/gcdigitalfellows/drbdotfiles.git "$DOTDIR"
-  cd "$DOTDIR" &>/dev/null || exit
+  cd "$DOTDIR" &>/dev/null
 else
-  cd "$DOTDIR" &>/dev/null || exit
+  warn "$DOTDIR exists. Attempting to update from repo"
+  cd "$DOTDIR" &>/dev/null
   git pull
 fi
 
-e_ask "Run all scripts without prompts?"
+e_ask "Run remainder of software scripts without prompts?"
 is_confirmed DOALL
 
 if [[ "$DOALL" -eq 0 ]]; then
-  if [[ $(uname) == 'Darwin' ]]; then
-    e_ask "Install Homebrew apps?"
-    is_confirmed hb
-    e_ask "Install Homebrew cask apps?"
-    is_confirmed ca
-  fi
-  e_ask "Install Python pips?"
+  e_ask "Install Homebrew apps?"
+  is_confirmed hb
+  # e_ask "Install Homebrew cask apps?"
+  # is_confirmed ca
+  e_ask "Install Python and Anaconda packages?"
   is_confirmed pi
   e_ask "Symlink dotfiles?"
   is_confirmed lns
 fi #[ $DOALL -eq 1 ]
 
-if [[ $(uname) == 'Darwin' ]]; then
-  if [[ "$DOALL" -eq 1 ]] || [[ "$hb" -eq 1 ]]; then
-    section "Homebrew"
-    info "Setting user permissions on /usr/local"
-    sudo chown -R "$USER:admin" /usr/local
- 
-    source 'etc/brews.sh'
-    pyenv install 2.7.11
-    pyenv install 3.5.1
-    pyenv install anaconda3-2.4.0
-    pyenv rehash
-    pyenv global 3.5.1 2.7.11 anaconda3-2.4.0
-    source 'home/*' # refresh the environment to get pyenv up and running
-  fi
-  if [[ "$DOALL" -eq 1 ]] || [[ "$ca" -eq 1 ]]; then
-    section "Homebrew Cask"
-    source 'etc/cask.sh'
-  fi
+if [[ "$DOALL" -eq 1 ]] || [[ "$hb" -eq 1 ]]; then
+  section "Installing Homebrew Packages"
+  # info "Setting user permissions on /usr/local"
+  # sudo chown -R "$USER:admin" /usr/local
+  source "./etc/brews.sh"
+	success "Finished installing packages with Homebrew"
 fi
+# if [[ "$DOALL" -eq 1 ]] || [[ "$ca" -eq 1 ]]; then
+#   section "Homebrew Cask"
+#   source 'etc/cask.sh'
+# fi
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$pi" -eq 1 ]]; then
-  section "Python and Pips"
-  source 'etc/pip.sh'
+  section "Python and Python Packages"
+	info "Installing Python 2.7, 3.5, and anaconda using pyenv"
+  pyenv install 2.7.11
+  pyenv install 3.5.1
+  pyenv install anaconda3-2.4.0
+  pyenv global 3.5.1
+  source "./home/*" # refresh the environment to get pyenv up and running
+	info "Installing Python packages"
+  source "etc/pip.sh"
+	success "Finished installing Python packages"
 fi
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$lns" -eq 1 ]]; then
@@ -199,12 +217,10 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$lns" -eq 1 ]]; then
   backup_all=false
   skip_all=false
 
-  for src in $(find -H "$DOTDIR/home" -type f)
-  do
+  for src in $(find -H "$DOTDIR/home" -type f); do
     dst="$HOME/.$(basename "${src%}")"
     link_file "$src" "$dst"
   done
-
   success "Dotfiles successfully symlinked to your home directory"
 
 fi
@@ -212,17 +228,17 @@ fi
 popd &>/dev/null
 
 success "Finished running all of the installation scripts."
-e_ask "Would you like to create some shortcuts on the desktop?"
-is_confirmed sc
-if [[ "$sc" -eq 1 ]]; then
-  dst="$HOME/Desktop/"
-  ln -sf /Applications/Atom.app "$dst"
-  ln -sf /Applications/Cyberduck.app "$dst"
-  ln -sf /Applications/Firefox.app "$dst"
-  ln -sf /Applications/Google\ Chrome.app "$dst"
-  ln -sf /Applications/GitHub\ Desktop.app "$dst"
-  ln -sf /Applications/iTerm.app "$dst"
-  ln -sf /Applications/QGIS.app "$dst"
-  ln -sf /Applications/R.app "$dst"
-fi
-success "You should probably restart your computer now."
+# e_ask "Would you like to create some shortcuts on the desktop?"
+# is_confirmed sc
+# if [[ "$sc" -eq 1 ]]; then
+#   dst="$HOME/Desktop/"
+#   ln -sf /Applications/Atom.app "$dst"
+#   ln -sf /Applications/Cyberduck.app "$dst"
+#   ln -sf /Applications/Firefox.app "$dst"
+#   ln -sf /Applications/Google\ Chrome.app "$dst"
+#   ln -sf /Applications/GitHub\ Desktop.app "$dst"
+#   ln -sf /Applications/iTerm.app "$dst"
+#   ln -sf /Applications/QGIS.app "$dst"
+#   ln -sf /Applications/R.app "$dst"
+# fi
+warn "You should probably restart your computer now."

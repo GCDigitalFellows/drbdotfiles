@@ -49,6 +49,7 @@ Follow the prompts and you should be golden!
 * emacs: editor
 * vim: [better] editor
 * git: version control
+* libxml2: xml parsing, prereq for lots of software
 * matplotlib-basemap: basemap for python (needs to be built)
 * mysql: updated version of database software
 * postgresql: another database option
@@ -56,31 +57,31 @@ Follow the prompts and you should be golden!
 * pyenv: python environment manager and installer
 * pyenv-virtualenv: for using virtualenv with pyenv
 
-##Gui Apps (casks)
+##~~Gui Apps (casks)~~ (removed in favor of installing via Remote Desktop)
 
-* aquamacs/emacs-cocoa: gui versions of emacs
-* atom/brackets: editors
-* avast: anti-virus/malware
-* cyberduck: ftp
-* diffmerge: gui diff tool
-* firefox/chrome: browsers
-* gimp: image editor
-* github: gui github client
-* inkscape: vector graphics editor
-* iterm2: better terminal editor
-* keka: better gui archive utility
-* libreoffice: free office suite
-* macvim: gui editor
-* mapbox-studio: gis suite
-* qgis: gis suite
-* r: statistical software
-* sequel-pro: gui database management
-* sourcetree: gui svn client
-* sqlitebrowser: gui sqlite db client
-* textmate: another editor
-* tilemill: gui tool for editing map tiles
-* virtualbox: virtual machine engine
-* zotero: reference management software
+* ~~emacs-cocoa: gui versions of emacs~~
+* ~~atom: open source text editor~~
+* ~~avast: anti-virus/malware~~
+* ~~cyberduck: ftp~~
+* ~~diffmerge: gui diff tool~~
+* ~~firefox/chrome: browsers~~
+* ~~gimp: image editor~~
+* ~~github: gui github client~~
+* ~~inkscape: vector graphics editor~~
+* ~~iterm2: better terminal editor~~
+* ~~keka: better gui archive utility~~
+* ~~libreoffice: free office suite~~
+* ~~macvim: gui editor~~
+* ~~mapbox-studio: gis suite~~
+* ~~qgis: gis suite~~
+* ~~r: statistical software~~
+* ~~sequel-pro: gui database management~~
+* ~~sourcetree: gui svn client~~
+* ~~sqlitebrowser: gui sqlite db client~~
+* ~~textmate: another editor~~
+* ~~tilemill: gui tool for editing map tiles~~
+* ~~virtualbox: virtual machine engine~~
+* ~~zotero: reference management software~~
 
 ##Python
 

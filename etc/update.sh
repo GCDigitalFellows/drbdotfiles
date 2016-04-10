@@ -4,25 +4,25 @@
 # Update everything
 #
 
-if [[ $(uname) == 'Darwin' ]]; then
-    echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> System updates <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
-    sudo softwareupdate -i -a
-    echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update Homebrew <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
-    brew update
-    echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update Brew Packages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
-    brew upgrade --all
-    echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Cleanup Outdated Brew Packages <<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
-    brew cleanup
+# if [[ $(uname) == 'Darwin' ]]; then
+echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> System updates <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
+sudo softwareupdate -i -a
+echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update Homebrew <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
+brew update
+echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update Brew Packages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
+brew upgrade --all
+echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Cleanup Outdated Brew Packages <<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
+brew cleanup
     # echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update Brew Casks <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
     # brew-cask-upgrade
     # echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Cleanup Outdated Casks <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
     # $DOTDIR/bin/brew-cask-cleanup
-elif type "apt-get" 2>/dev/null; then
-    echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update APT package list <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
-    sudo apt-get update
-    echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update APT Packages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
-    sudo apt-get upgrade
-fi
+# elif type "apt-get" 2>/dev/null; then
+#     echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update APT package list <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
+#     sudo apt-get update
+#     echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update APT Packages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
+#     sudo apt-get upgrade
+# fi
 
 # echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update N Version Manager <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
 # n latest
@@ -48,7 +48,7 @@ fi
 echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update PIP <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
 pip install -U pip
 echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update PIP Packages <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
-source $DOTDIR/etc/pip.sh
+source "$DOTDIR/etc/pip.sh"
 # echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update Oh My ZSH <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"
 # upgrade_oh_my_zsh
 # echo "${bg[magenta]}${fg[yellow]}>>>>>>>>>>>>>>>>>>>>> Update Zgen <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<${reset_color}"

@@ -20,13 +20,13 @@ if type "brew" > /dev/null 2>&1; then
     libxml2
     homebrew/python/matplotlib-basemap
     mysql
+    postgresql
     pyenv
     pyenv-virtualenv
     sqlite
     vim
   )
   #additional stuff removed to save time
-  # postgresql
   # brew install imagemagick --with-webp
 
   for brewitem in "${brewlist[@]}"; do
