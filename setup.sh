@@ -123,11 +123,9 @@ link_file() {
 }
 
 # read initial newline
-read -rs -n1 dummy
-
-info "*********************"
-info "*    Here we go!    *"
-info "*********************"
+info 'GCDF Mac setup script. You may be prompted for your password. Hit a key to continue...'
+read -r dummy
+info "Here we go!"
 
 section "Preliminary Software Checks"
 
@@ -171,7 +169,7 @@ section "Setting up dotfiles repo"
 # clone the dotfiles
 pushd $(pwd)
 if [[ ! -d $DOTDIR ]]; then
-  info "Cloning dotfiles to $DOTDIR"
+  info "Cloning dotfiles to your user directory"
   git clone https://github.com/gcdigitalfellows/drbdotfiles.git "$DOTDIR"
   cd "$DOTDIR" &>/dev/null
 else
