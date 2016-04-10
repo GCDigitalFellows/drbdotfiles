@@ -223,7 +223,7 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$rb" -eq 1 ]]; then
   section "Rbenv and Ruby Gem Packages"
   info "Installing Ruby versions"
   source "$HOME/.bash_profile"
-  rbenv install $rbversion
+  rbenv install $RBVERSION
   success "Installed Ruby 2.3.0"
 fi
 
