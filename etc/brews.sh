@@ -18,16 +18,17 @@ if type "brew" > /dev/null 2>&1; then
     emacs
     git
     libxml2
-    homebrew/python/matplotlib-basemap
     mysql
     postgresql
     pyenv
     pyenv-virtualenv
+    rbenv
     sqlite
     vim
   )
   #additional stuff removed to save time
-  # brew install imagemagick --with-webp
+  # imagemagick --with-webp
+  # homebrew/python/matplotlib-basemap
 
   for brewitem in "${brewlist[@]}"; do
     brew install "$brewitem";

@@ -1,6 +1,12 @@
 #!/bin/bash
 
-# Helper functions
+DOTDIR="$HOME/.dotfiles"
+RBVERSION="2.3.0"
+PY3VERSION="3.5.1"
+PY2VERSION="2.7.11"
+ANACONDAVERSION="anaconda3-2.5.0"
+
+# helper functions
 command_exists () {
   command -v "$1" &> /dev/null 2>&1
 }
@@ -18,7 +24,7 @@ success() {
 }
 
 warn() {
-  printf "\r  [ \033[00;33m\!\!\033[0m ] %s\n" "$1"
+  printf "\r  [ \033[00;33m!!\033[0m ] %s\n" "$1"
 }
 
 fail() {
@@ -116,6 +122,9 @@ link_file() {
   fi
 }
 
+# read initial newline
+read -rs -n1 dummy
+
 info "*********************"
 info "*    Here we go!    *"
 info "*********************"
@@ -123,7 +132,6 @@ info "*********************"
 section "Preliminary Software Checks"
 
 # Set up directories
-DOTDIR="$HOME/.dotfiles"
 clt=$(xcode-select -p &>/dev/null)$?
 info "Checking for XCode command line tools"
 if [[ $clt -eq 2 ]]; then
@@ -180,8 +188,10 @@ if [[ "$DOALL" -eq 0 ]]; then
   is_confirmed hb
   # e_ask "Install Homebrew cask apps?"
   # is_confirmed ca
-  e_ask "Install Python and Anaconda packages?"
+  e_ask "Install Python and Pip/Anaconda packages?"
   is_confirmed pi
+  e_ask "Install Ruby using rbenv?"
+  is_confirmed rb
   e_ask "Symlink dotfiles?"
   is_confirmed lns
 fi #[ $DOALL -eq 1 ]
@@ -200,15 +210,22 @@ fi
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$pi" -eq 1 ]]; then
   section "Python and Python Packages"
-	info "Installing Python 2.7, 3.5, and anaconda using pyenv"
-  pyenv install 2.7.11
-  pyenv install 3.5.1
-  pyenv install anaconda3-2.4.0
-  pyenv global 3.5.1
-  source "./home/*" # refresh the environment to get pyenv up and running
+	info "Installing Python $PY2VERSION, $PY3VERSION, and anaconda using pyenv"
+  pyenv install $PY3VERSION
+  pyenv install $PY2VERSION
+  pyenv install $ANACONDAVERSION
+  pyenv global $PY3VERSION
+  source "$HOME/.bash_profile" # refresh the environment to get pyenv up and running
 	info "Installing Python packages"
-  source "etc/pip.sh"
+  source "$DOTDIR/etc/pip.sh"
 	success "Finished installing Python packages"
+fi
+
+if [[ "$DOALL" -eq 1 ]] || [[ "$rb" -eq 1 ]]; then
+  section "Rbenv and Ruby Gem Packages"
+  info "Installing Ruby versions"
+  rbenv install "$rbversion"
+  success "Installed Ruby 2.3.0"
 fi
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$lns" -eq 1 ]]; then
@@ -222,7 +239,6 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$lns" -eq 1 ]]; then
     link_file "$src" "$dst"
   done
   success "Dotfiles successfully symlinked to your home directory"
-
 fi
 
 popd &>/dev/null
