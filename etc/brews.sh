@@ -7,7 +7,7 @@ if type "brew" > /dev/null 2>&1; then
 
   brew tap homebrew/dupes
 
-  brew install gnu-sed --default-names
+  brew install gnu-sed --with-default-names
   brew install wget --with-iri
 
   brewlist=(
