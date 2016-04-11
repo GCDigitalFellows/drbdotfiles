@@ -10,7 +10,6 @@ pips=(
   numpy
   pandas
   pillow
-  pip
   pyshp
   scipy
   shapely
@@ -24,8 +23,9 @@ pips=(
 # )
 
 for pip in "${pips[@]}"; do
-  pip2 install "$pip" -U
-  pip3 install "$pip" -U
+  conda install "$pip" -y
+  # pip2 install "$pip" -U
+  # pip3 install "$pip" -U
 done
 
 # for cnda in "${condas[@]}"; do

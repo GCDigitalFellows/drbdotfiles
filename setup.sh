@@ -226,7 +226,7 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$pi" -eq 1 ]]; then
   pyenv install $PY2VERSION
   pyenv install $ANACONDAVERSION
   pyenv global $PY3VERSION $PY2VERSION $ANACONDAVERSION
-  source "$HOME/.bash_profile" # refresh the environment to get pyenv up and running
+  source "$HOME/.profile" # refresh the environment to get pyenv up and running
 	info "Installing Python packages"
   source "$DOTDIR/etc/pip.sh"
 	success "Finished installing Python packages"
@@ -235,7 +235,7 @@ fi
 if [[ "$DOALL" -eq 1 ]] || [[ "$rb" -eq 1 ]]; then
   section "Rbenv and Ruby Gem Packages"
   info "Installing Ruby versions"
-  source "$HOME/.bash_profile"
+  source "$HOME/.profile"
   rbenv install $RBVERSION
   success "Installed Ruby 2.3.0"
 fi
