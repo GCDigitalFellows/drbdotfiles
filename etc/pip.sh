@@ -3,12 +3,14 @@
 # to-do: install via anaconda
 # to-do: install basemap, cartopy
 pips=(
+  cartopy
   jupyter
   matplotlib
   nltk
   numpy
   pandas
   pillow
+  pip
   pyshp
   scipy
   shapely
@@ -17,15 +19,17 @@ pips=(
   virtualenv
 )
 
-condas=(
-  scitools
-  cartopy
-)
+# condas=(
+#   scitools
+# )
 
 for pip in "${pips[@]}"; do
-  pip install "$pip" -U
+  pip2 install "$pip" -U
+  pip3 install "$pip" -U
 done
 
-for cnda in "${condas[@]}"; do
-  conda install -c "$cnda" -y
-done
+# for cnda in "${condas[@]}"; do
+#   conda install "$cnda" -y
+# done
+
+pip2 install -U -e git+https://github.com/hplgit/scitools.git#egg=scitools

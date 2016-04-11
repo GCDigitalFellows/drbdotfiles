@@ -206,6 +206,19 @@ fi
 #   source 'etc/cask.sh'
 # fi
 
+if [[ "$DOALL" -eq 1 ]] || [[ "$lns" -eq 1 ]]; then
+  section "Symlinking dotfiles"
+  overwrite_all=false
+  backup_all=false
+  skip_all=false
+
+  for src in $(find -H "$DOTDIR/home" -type f); do
+    dst="$HOME/.$(basename "${src%}")"
+    link_file "$src" "$dst"
+  done
+  success "Dotfiles successfully symlinked to your home directory"
+fi
+
 if [[ "$DOALL" -eq 1 ]] || [[ "$pi" -eq 1 ]]; then
   section "Python and Python Packages"
 	info "Installing Python $PY2VERSION, $PY3VERSION, and anaconda using pyenv"
@@ -225,19 +238,6 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$rb" -eq 1 ]]; then
   source "$HOME/.bash_profile"
   rbenv install $RBVERSION
   success "Installed Ruby 2.3.0"
-fi
-
-if [[ "$DOALL" -eq 1 ]] || [[ "$lns" -eq 1 ]]; then
-  section "Symlinking dotfiles"
-  overwrite_all=false
-  backup_all=false
-  skip_all=false
-
-  for src in $(find -H "$DOTDIR/home" -type f); do
-    dst="$HOME/.$(basename "${src%}")"
-    link_file "$src" "$dst"
-  done
-  success "Dotfiles successfully symlinked to your home directory"
 fi
 
 popd &>/dev/null
