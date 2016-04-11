@@ -32,4 +32,3 @@ done
 #   conda install "$cnda" -y
 # done
 
-pip2 install -U -e git+https://github.com/hplgit/scitools.git#egg=scitools
