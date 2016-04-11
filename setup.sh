@@ -167,7 +167,7 @@ fi
 
 section "Setting up dotfiles repo"
 # clone the dotfiles
-pushd $(pwd)
+pushd $(pwd) &>/dev/null
 if [[ ! -d $DOTDIR ]]; then
   info "Cloning dotfiles to your user directory"
   git clone https://github.com/gcdigitalfellows/drbdotfiles.git "$DOTDIR"
@@ -192,6 +192,8 @@ if [[ "$DOALL" -eq 0 ]]; then
   is_confirmed rb
   e_ask "Symlink dotfiles?"
   is_confirmed lns
+  e_ask "Add customizations?"
+  is_confirmed cz
 fi #[ $DOALL -eq 1 ]
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$hb" -eq 1 ]]; then
@@ -199,7 +201,7 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$hb" -eq 1 ]]; then
   # info "Setting user permissions on /usr/local"
   # sudo chown -R "$USER:admin" /usr/local
   source "./etc/brews.sh"
-	success "Finished installing packages with Homebrew"
+  success "Finished installing packages with Homebrew"
 fi
 # if [[ "$DOALL" -eq 1 ]] || [[ "$ca" -eq 1 ]]; then
 #   section "Homebrew Cask"
@@ -221,15 +223,16 @@ fi
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$pi" -eq 1 ]]; then
   section "Python and Python Packages"
-	info "Installing Python $PY2VERSION, $PY3VERSION, and anaconda using pyenv"
-  pyenv install $PY3VERSION
-  pyenv install $PY2VERSION
+  info "Installing Python $PY2VERSION, $PY3VERSION, and anaconda using pyenv"
+  # pyenv install $PY3VERSION
+  # pyenv install $PY2VERSION
   pyenv install $ANACONDAVERSION
-  pyenv global $PY3VERSION $PY2VERSION $ANACONDAVERSION
+  # pyenv global $PY3VERSION $PY2VERSION $ANACONDAVERSION
+  pyenv global $ANACONDAVERSION
   source "$HOME/.profile" # refresh the environment to get pyenv up and running
-	info "Installing Python packages"
+  info "Installing Python packages"
   source "$DOTDIR/etc/pip.sh"
-	success "Finished installing Python packages"
+  success "Finished installing Python packages"
 fi
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$rb" -eq 1 ]]; then
@@ -240,8 +243,42 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$rb" -eq 1 ]]; then
   success "Installed Ruby 2.3.0"
 fi
 
-popd &>/dev/null
+if [[ "$DOALL" -eq 1 ]] || [[ "$cz" -eq 1 ]]; then
+osascript <<EOD
+tell application "Terminal"
+  local allOpenedWindows
+  local initialOpenedWindows
+  local windowID
+  set themeName to "Solarized Dark"
+  (* Store the IDs of all the open terminal windows. *)
+  set initialOpenedWindows to id of every window
+  (* Open the custom theme so that it gets added to the list
+     of available terminal themes (note: this will open two
+     additional terminal windows). *)
+  do shell script "open '$DOTDIR/osx-terminal-themes/schemes/" & themeName & ".terminal'"
+  (* Wait a little bit to ensure that the custom theme is added. *)
+  delay 1
+  (* Set the custom theme as the default terminal theme. *)
+  set default settings to settings set themeName
+  (* Get the IDs of all the currently opened terminal windows. *)
+  set allOpenedWindows to id of every window
+  repeat with windowID in allOpenedWindows
+    (* Close the additional windows that were opened in order
+       to add the custom theme to the list of terminal themes. *)
+    if initialOpenedWindows does not contain windowID then
+      close (every window whose id is windowID)
+    (* Change the theme for the initial opened terminal windows
+       to remove the need to close them in order for the custom
+       theme to be applied. *)
+    else
+      set current settings of tabs of (every window whose id is windowID) to settings set themeName
+    end if
+  end repeat
+end tell
+EOD
+fi
 
+popd &>/dev/null
 success "Finished running all of the installation scripts."
 # e_ask "Would you like to create some shortcuts on the desktop?"
 # is_confirmed sc
