@@ -1,0 +1,3 @@
+[submodule "osx-terminal-themes"]
+	path = osx-terminal-themes
+	url = https://github.com/lysyi3m/osx-terminal-themes.git
