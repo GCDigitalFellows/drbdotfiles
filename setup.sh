@@ -200,7 +200,7 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$hb" -eq 1 ]]; then
   section "Installing Homebrew Packages"
   # info "Setting user permissions on /usr/local"
   # sudo chown -R "$USER:admin" /usr/local
-  source "./etc/brews.sh"
+  source "$DOTDIR/etc/brews.sh"
   success "Finished installing packages with Homebrew"
 fi
 # if [[ "$DOALL" -eq 1 ]] || [[ "$ca" -eq 1 ]]; then
