@@ -7,6 +7,7 @@ OSX_VERS=$(sw_vers -productVersion | awk -F "." '{print $2}')
 if [ "$OSX_VERS" -ge 9 ]; then
     # create the placeholder file that's checked by CLI updates' .dist code 
     # in Apple's SUS catalog
+    say "password"
     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
     # find the CLI Tools update
     PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
@@ -22,6 +23,7 @@ else
 
     TOOLS=clitools.dmg
     curl "$DMGURL" -o "$TOOLS"
+    say "password"
     TMPMOUNT=`/usr/bin/mktemp -d /tmp/clitools.XXXX`
     hdiutil attach "$TOOLS" -mountpoint "$TMPMOUNT"
     installer -pkg "$(find $TMPMOUNT -name '*.mpkg')" -target /

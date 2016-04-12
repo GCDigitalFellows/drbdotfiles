@@ -1,9 +1,22 @@
 # Add a variable pointing to these dotfiles!
 export DOTDIR="$HOME/.dotfiles"
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
 
 # Terminal Colors
-export CLICOLOR=1
 export TERM="xterm-256color"
+
+if ls --color > /dev/null 2>&1; then # GNU `ls`
+  export colorflag="--color"
+else # OS X `ls`
+  export colorflag="-G"
+fi
+export CLICOLOR=1
+
+alias ls='command ls ${colorflag}'
+alias l='ls -F'
+alias la='l -ah'
+alias ll='la -l'
+export LSCOLORS=GxFxCxDxBxegedabagaced
 
 # Bash History Options
 export HISTSIZE=32768
@@ -17,17 +30,6 @@ export EDITOR=atom
 export PAGER=less
 export MANPAGER="less -X"
 
-if ls --color > /dev/null 2>&1; then # GNU `ls`
-	colorflag="--color"
-else # OS X `ls`
-	colorflag="-G"
-fi
-alias ls='command ls ${colorflag}'
-alias l='ls -F'
-alias la='l -ah'
-alias ll='la -l'
-export LSCOLORS=GxFxCxDxBxegedabagaced
-
 alias h='history | grep'
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -40,11 +42,10 @@ alias mkdir='mkdir -p -v'
 alias more='less'
 export LESS="-X -M -E -R"
 
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/opt/coreutils/libexec/gnubin:${PATH}"
-
 alias update='source $DOTDIR/etc/update.sh'
 
 # pyenv
 export PYENV_ROOT=/usr/local/var/pyenv
 if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
 if which pyenv-virtualenv-init > /dev/null; then eval "$(pyenv virtualenv-init -)"; fi
+

@@ -17,16 +17,14 @@ sudo dscl . create /Users/$USERNAME UniqueID $USERID
 sudo dscl . create /Users/$USERNAME PrimaryGroupID 20
 sudo dscl . create /Users/$USERNAME UserShell /bin/bash
 sudo dscl . create /Users/$USERNAME NFSHomeDirectory /Users/$USERNAME
-# sudo cp -R /System/Library/User\ Template/English.lproj /Users/$USERNAME
-# sudo chown -R $USERNAME:staff /Users/$USERNAME
-sudo createhomedir -u $USERNAME
+sudo cp -R /System/Library/User\ Template/English.lproj /Users/$USERNAME
+# sudo createhomedir -u $USERNAME
 cd /Users/$USERNAME
 sudo git clone https://github.com/GCDigitalFellows/drbdotfiles.git .dotfiles
 cd .dotfiles
-git submodule init
-git submodule update
+sudo git submodule init
+sudo git submodule update
 sudo ln -s /Users/$USERNAME/.dotfiles/home/profile /Users/$USERNAME/.profile
 cd /Users/$USERNAME
-sudo chown -R $USERNAME .dotfiles
-sudo chown $USERNAME .profile
+sudo chown -R $USERNAME:staff /Users/$USERNAME
 sudo dscl . create /Users/$USERNAME picture "/Users/$USERNAME/.dotfiles/gcdilogo.png"
