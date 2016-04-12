@@ -7,7 +7,7 @@ USERNAME=student
 # Uncomment the next two lines to use this as a startup script, and remove the "sudos" from subsequent lines
 # . /etc/rc.common
 # dscl . create /Users/$USERNAME
-say "I need you to enter the password"
+say "Password"
 sudo dscl . create /Users/$USERNAME RealName "$USERNAME"
 sudo dscl . create /Users/$USERNAME hint "$USERNAME"
 sudo dscl . passwd /Users/$USERNAME $USERNAME
