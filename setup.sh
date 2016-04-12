@@ -172,10 +172,12 @@ if [[ ! -d $DOTDIR ]]; then
   info "Cloning dotfiles to your user directory"
   git clone https://github.com/gcdigitalfellows/drbdotfiles.git "$DOTDIR"
   cd "$DOTDIR" &>/dev/null
+  git submodule sync
 else
   warn "$DOTDIR exists. Attempting to update from repo"
   cd "$DOTDIR" &>/dev/null
   git pull
+  git submodule sync
 fi
 
 e_ask "Run remainder of software scripts without prompts?"
