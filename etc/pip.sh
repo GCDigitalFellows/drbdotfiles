@@ -14,20 +14,10 @@ pips=(
   scipy
   shapely
   scikit-learn
-  virtualenv
 )
 
-# condas=(
-#   scitools
-# )
-
 for pip in "${pips[@]}"; do
-  conda install "$pip" -y
+  conda install -y "$pip"
   # pip2 install "$pip" -U
   # pip3 install "$pip" -U
 done
-
-# for cnda in "${condas[@]}"; do
-#   conda install "$cnda" -y
-# done
-
