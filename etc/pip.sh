@@ -3,18 +3,17 @@
 # to-do: install via anaconda
 # to-do: install basemap, cartopy
 pips=(
-  cartopy
+  -c scitools cartopy
   jupyter
   matplotlib
   nltk
   numpy
   pandas
   pillow
-  pyshp
+  -c scitools pyshp
   scipy
   shapely
-  shapy
-  sklearn
+  scikit-learn
   virtualenv
 )
 
