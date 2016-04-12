@@ -172,12 +172,14 @@ if [[ ! -d $DOTDIR ]]; then
   info "Cloning dotfiles to your user directory"
   git clone https://github.com/gcdigitalfellows/drbdotfiles.git "$DOTDIR"
   cd "$DOTDIR" &>/dev/null
-  git submodule sync
+  git submodule init
+  git submodule update
 else
   warn "$DOTDIR exists. Attempting to update from repo"
   cd "$DOTDIR" &>/dev/null
   git pull
-  git submodule sync
+  git submodule init
+  git submodule update
 fi
 
 e_ask "Run remainder of software scripts without prompts?"
@@ -221,6 +223,8 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$lns" -eq 1 ]]; then
     link_file "$src" "$dst"
   done
   success "Dotfiles successfully symlinked to your home directory"
+  info "Reloading shell environment..."
+  source "$DOTDIR/home/profile"
 fi
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$pi" -eq 1 ]]; then
@@ -231,7 +235,7 @@ if [[ "$DOALL" -eq 1 ]] || [[ "$pi" -eq 1 ]]; then
   pyenv install $ANACONDAVERSION
   # pyenv global $PY3VERSION $PY2VERSION $ANACONDAVERSION
   pyenv global $ANACONDAVERSION
-  source "$HOME/.profile" # refresh the environment to get pyenv up and running
+  source "$DOTDIR/home/profile"
   info "Installing Python packages"
   source "$DOTDIR/etc/pip.sh"
   success "Finished installing Python packages"
@@ -240,7 +244,7 @@ fi
 if [[ "$DOALL" -eq 1 ]] || [[ "$rb" -eq 1 ]]; then
   section "Rbenv and Ruby Gem Packages"
   info "Installing Ruby versions"
-  source "$HOME/.profile"
+  source "$DOTDIR/home/profile"
   rbenv install $RBVERSION
   success "Installed Ruby 2.3.0"
 fi
