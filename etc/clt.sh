@@ -7,11 +7,11 @@ OSX_VERS=$(sw_vers -productVersion | awk -F "." '{print $2}')
 if [ "$OSX_VERS" -ge 9 ]; then
     # create the placeholder file that's checked by CLI updates' .dist code 
     # in Apple's SUS catalog
-    say "password"
     touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
     # find the CLI Tools update
     PROD=$(softwareupdate -l | grep "\*.*Command Line" | head -n 1 | awk -F"*" '{print $2}' | sed -e 's/^ *//' | tr -d '\n')
     # install it
+    say "password"
     softwareupdate -i "$PROD" -v
  
 # on 10.7/10.8, we instead download from public download URLs, which can be found in
