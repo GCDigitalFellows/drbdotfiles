@@ -198,6 +198,8 @@ if [[ "$DOALL" -eq 0 ]]; then
   is_confirmed lns
   e_ask "Add customizations?"
   is_confirmed cz
+  e_ask "Add 'student' user?"
+  is_confirmed usr
 fi #[ $DOALL -eq 1 ]
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$hb" -eq 1 ]]; then
@@ -282,6 +284,10 @@ tell application "Terminal"
   end repeat
 end tell
 EOD
+fi
+
+if [[ "$DOALL" -eq 1 ]] || [[ "$usr" -eq 1 ]]; then
+  source "$DOTDIR/useradd.sh"
 fi
 
 popd &>/dev/null
