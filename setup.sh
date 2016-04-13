@@ -287,7 +287,7 @@ EOD
 fi
 
 if [[ "$DOALL" -eq 1 ]] || [[ "$usr" -eq 1 ]]; then
-  source "$DOTDIR/useradd.sh"
+  source "$DOTDIR/useracct.sh"
 fi
 
 popd &>/dev/null
