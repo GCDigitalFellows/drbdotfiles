@@ -40,7 +40,8 @@ Follow the prompts and you should be golden!
 * OS X Command Line Tools
 * homebrew
 * homebrew cask
-* python 2.7.11, 3.5.1, anaconda3
+* python ~~2.7.11,~~ 3.5.1 via anaconda3-2.5.0
+* ruby 2.4
 
 ##Homebrew stuff
 
@@ -50,14 +51,15 @@ Follow the prompts and you should be golden!
 * vim: [better] editor
 * git: version control
 * libxml2: xml parsing, prereq for lots of software
-* matplotlib-basemap: basemap for python (needs to be built)
+* ~~matplotlib-basemap: basemap for python (needs to be built)~~ (installed via conda)
 * mysql: updated version of database software
 * postgresql: another database option
 * sqlite: yet another database option (better for local apps...)
 * pyenv: python environment manager and installer
 * pyenv-virtualenv: for using virtualenv with pyenv
+* rbenv: ruby version management
 
-##~~Gui Apps (casks)~~ (removed in favor of installing via Remote Desktop)
+##~~Gui Apps (casks)~~ (removed in favor of installing via Server install script)
 
 * ~~emacs-cocoa: gui versions of emacs~~
 * ~~atom: open source text editor~~
@@ -89,12 +91,12 @@ Follow the prompts and you should be golden!
 * jupyter: ipython notebooks
 * matplotlib: mapping lib
 * nltk: natural language toolkit
+* nltk complete corpera
 * numpy: base library for scientific computing
 * pandas: data manipulation
 * pillow: images
 * pyshp: shapefiles
 * scipy: “science” tools
 * shapely: shape manipulation
-* shapy: network emulation
-* sklearn: machine learning
+* sklearn (scikit-learn): machine learning
 * virtualenv: virtual environments for isolating dependencies
