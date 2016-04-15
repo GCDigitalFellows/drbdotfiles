@@ -21,3 +21,5 @@ for pip in "${pips[@]}"; do
   # pip2 install "$pip" -U
   # pip3 install "$pip" -U
 done
+
+python -m nltk.downloader all
